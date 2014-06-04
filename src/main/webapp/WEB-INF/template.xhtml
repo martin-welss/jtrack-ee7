@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Hello JTrack EE 7</title>
+        <link rel="stylesheet" href="./resources/base.css" type="text/css" />        
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:500,700' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+    <img src="./resources/bug.png"/>
+    <ui:insert name="content">
+    MIssing Content
+    </ui:insert>
+
+        <h:outputText value="#{hello.build_id}" /><br/>
+    </h:body>
+</html>
