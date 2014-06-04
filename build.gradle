@@ -1,0 +1,53 @@
+apply plugin: 'war'
+	
+assert System.env.JBOSS_HOME!=null	
+	
+dependencies {
+	providedCompile files("$System.env.JBOSS_HOME/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar",
+				          "$System.env.JBOSS_HOME/modules/system/layers/base/javax/enterprise/api/main/cdi-api-1.1.jar"
+			        )
+}
+
+task buildId << {	
+	buildDir.mkdirs()
+	// generate timestamp and user for build_id
+	def build_id=new Date().format('yyyyMMdd HHmm ')+System.properties.'user.name'
+	
+	try {
+		// get git status und ref
+		def gitref="git rev-parse --short HEAD".execute().text.trim()
+		def gittag="git describe --tags --always $gitref".execute().text.trim()
+		//if(gitref!=gittag) { gitref="$gittag $gitref"}
+		def gitdirty="git status --porcelain".execute().text.isEmpty()?" ":"*"
+		build_id+=" $gittag$gitdirty"
+	}
+	catch (Exception x) {
+		println "Warning: no git executable, using simple buildId"
+	}
+	println "buildId: $build_id"
+	
+	// and write build_id to file
+	new File("$buildDir/build_id.txt").withWriter { out -> out.println build_id }
+}
+
+
+war.dependsOn buildId
+war {
+	metaInf { 
+		from "$buildDir/build_id.txt" 
+	}
+}
+
+task deploy(dependsOn: war, type: Copy) {
+		println "configure task deploy"
+		from('build/libs/') {
+			include '*.war'
+		}
+		into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
+		
+		doLast {
+			println "executed."
+		}
+}
+	
+
