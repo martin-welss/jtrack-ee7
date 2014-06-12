@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/enterprise/api/main/cdi-api-1.1.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
