@@ -29,6 +29,7 @@ URLClassLoader loader = GroovyObject.class.classLoader
 configurations.jdbcdriver.each {File file ->
 	loader.addURL(file.toURI().toURL())
 }
+println "jdbc drivers: "+Class.forName("org.h2.Driver")+", "+Class.forName("org.postgresql.Driver")
 
 
 task buildId << {	
@@ -82,8 +83,12 @@ task initdb(dependsOn: show) << {
 	new File("${System.properties.'user.home'}/system.properties").withInputStream {
 		System.properties.load(it)
 	}
-	def sql=Sql.newInstance("${System.properties.'exampleds.jdbc.url'}",
+	def sql= Sql.newInstance("${System.properties.'exampleds.jdbc.url'}",
 					    "${System.properties.'exampleds.user'}",
 						"${System.properties.'exampleds.password'}")
+	sql.execute("drop table task if exists")
+	sql.execute("create table task (id int primary key, subject varchar(80), description varchar(800))")
+	sql.execute("insert into task values (1, 'nullpointer exception on start', 'type start and hit return')")
+	sql.close()
 }
 
