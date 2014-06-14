@@ -5,16 +5,24 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Hello JTrack EE 7</title>
+        <title>JTrack EE 7</title>
         <link rel="stylesheet" href="./resources/base.css" type="text/css" />        
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:500,700' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body>
     <img src="./resources/bug.png"/>
+    <nav>
+    <h:form>
+        <h:commandLink value="New Bug" action="newbug"/>
+        <h:commandLink value="Search Bugs" action="search"/>
+        <h:commandLink value="Configure Users" action="useradmin"/>
+        <h:commandLink value="Configure Components" action="componentadmin"/>
+    </h:form>
+    </nav>
     <ui:insert name="content">
-    MIssing Content
+    Missing Content
     </ui:insert>
 
-        <h:outputText value="#{hello.build_id}" /><br/>
+        <h:outputText value="#{webconversation.buildId}" /><br/>
     </h:body>
 </html>

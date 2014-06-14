@@ -5,3 +5,8 @@ body {
   text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8);
   background-image: linear-gradient(cornflowerblue,skyblue); 
 }
+
+nav a {
+  margin-left: 20px;
+  margin-right: 20px;
+}
