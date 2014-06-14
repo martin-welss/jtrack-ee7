@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Task {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long taskid;
 
 	private Date created;
