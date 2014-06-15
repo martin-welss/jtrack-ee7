@@ -1,7 +1,7 @@
 package itf.jtrack.web;
 
 import itf.jtrack.model.Component;
-import itf.jtrack.model.Task;
+import itf.jtrack.model.Bug;
 import itf.jtrack.model.User;
 
 import java.io.BufferedReader;
@@ -20,9 +20,9 @@ public class WebConversation implements Serializable {
 	private static int conversation_counter=1;
 	private static String buildId=null;
 	private int id;
-	private User user;
-	private Task task;
-	private Component component;
+	private User user=new User();
+	private Bug bug=new Bug();
+	private Component component=new Component();
 	
 	public User getUser() {
 		return user;
@@ -32,12 +32,12 @@ public class WebConversation implements Serializable {
 		this.user = user;
 	}
 
-	public Task getTask() {
-		return task;
+	public Bug getBug() {
+		return bug;
 	}
 
-	public void setTask(Task task) {
-		this.task = task;
+	public void setBug(Bug bug) {
+		this.bug = bug;
 	}
 
 	public Component getComponent() {

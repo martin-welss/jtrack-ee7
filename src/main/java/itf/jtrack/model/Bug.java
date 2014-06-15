@@ -8,29 +8,36 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-@Entity(name="tasks")
-public class Task {
+@Entity(name="bugs")
+public class Bug {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long taskid;
+	private Long bugid;
 
 	private Date created;
 
 	private Date lastchange;
 
 	private Date deadline;
+	
+	@NotNull
+	private String title;
+	
+	@NotNull
+	private String description;
 
 	@Enumerated(EnumType.STRING)
 	private TrackSate state;
 
-	public Long getTaskid() {
-		return taskid;
+	public Long getBugid() {
+		return bugid;
 	}
 
-	public void setTaskid(Long taskid) {
-		this.taskid = taskid;
+	public void setBugid(Long bugid) {
+		this.bugid = bugid;
 	}
 
 	public Date getCreated() {
@@ -64,5 +71,22 @@ public class Task {
 	public void setState(TrackSate state) {
 		this.state = state;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	
 }

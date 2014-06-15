@@ -20,6 +20,7 @@ dependencies {
 	providedCompile files("$System.env.JBOSS_HOME/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar",
 				          "$System.env.JBOSS_HOME/modules/system/layers/base/javax/enterprise/api/main/cdi-api-1.1.jar",
 						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/validation/api/main/validation-api-1.1.0.Final.jar",
+						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar",
 						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/persistence/api/main/hibernate-jpa-2.1-api-1.0.0.Final.jar")
 
 	jdbcdriver 'com.h2database:h2:1.3.173','org.postgresql:postgresql:9.3-1100-jdbc41'

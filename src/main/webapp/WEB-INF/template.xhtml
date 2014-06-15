@@ -13,10 +13,12 @@
     <img src="./resources/bug.png"/>
     <nav>
     <h:form>
+        <h:commandLink value="Start" action="index"/>
         <h:commandLink value="New Bug" action="newbug"/>
         <h:commandLink value="Search Bugs" action="search"/>
         <h:commandLink value="Configure Users" action="useradmin"/>
         <h:commandLink value="Configure Components" action="componentadmin"/>
+        <h:link value="New Tab" outcome="index.xhtml" target="_blank"/>
     </h:form>
     </nav>
     <ui:insert name="content">

@@ -6,10 +6,12 @@
 <h:body>
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
-      <article>
-        This is New Bug <br />
-        <br />
-      </article>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputText value="Title: "/>
+            <h:inputText value="#{webconversation.bug.title}"/>
+        </h:panelGrid>
+    </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
