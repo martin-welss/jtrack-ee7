@@ -7,10 +7,16 @@
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
     <h:form>
-        <h:panelGrid columns="2">
+        <h:panelGrid columns="3">
             <h:outputText value="Title: "/>
-            <h:inputText value="#{webconversation.bug.title}"/>
+            <h:inputText id="title" value="#{webconversation.bug.title}"/>
+            <h:message for="title"/>
+            
+            <h:outputText value="Description: "/>
+            <h:inputText id="description" value="#{webconversation.bug.description}"/>
+            <h:message for="description"/>
         </h:panelGrid>
+        <h:commandButton value="Save" action="#{webconversation.saveBug()}"/>
     </h:form>
     </ui:define>
   </ui:composition>

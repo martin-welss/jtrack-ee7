@@ -88,5 +88,12 @@ public class Bug {
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return "Bug [bugid=" + bugid + ", created=" + created + ", lastchange="
+				+ lastchange + ", deadline=" + deadline + ", title=" + title
+				+ ", description=" + description + ", state=" + state + "]";
+	}
+
 	
 }

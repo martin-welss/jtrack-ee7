@@ -1,7 +1,8 @@
 package itf.jtrack.web;
 
-import itf.jtrack.model.Component;
+import itf.jtrack.managers.BugManager;
 import itf.jtrack.model.Bug;
+import itf.jtrack.model.Component;
 import itf.jtrack.model.User;
 
 import java.io.BufferedReader;
@@ -9,7 +10,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named(value="webconversation")
@@ -23,6 +27,19 @@ public class WebConversation implements Serializable {
 	private User user=new User();
 	private Bug bug=new Bug();
 	private Component component=new Component();
+	@Inject private Conversation conversation; 
+	@Inject private BugManager bugman;
+	
+	public WebConversation() {
+		id=conversation_counter++;
+		log("created");
+	}
+	
+	@PostConstruct
+	public void initialize() {
+		conversation.begin();
+		log("postConstruct()");
+	}
 	
 	public User getUser() {
 		return user;
@@ -48,11 +65,6 @@ public class WebConversation implements Serializable {
 		this.component = component;
 	}
 
-	public WebConversation() {
-		id=conversation_counter++;
-		log("created");
-	}
-	
 	public String getBuildId() {
 		if(buildId==null) {
 			log("reading buildId");
@@ -69,6 +81,16 @@ public class WebConversation implements Serializable {
 		return buildId;
 	}
 
+	public String newBug() {
+		bug=new Bug();
+		return "editbug";
+	}
+	
+	public String saveBug() {
+		bugman.save(bug);
+		return "index";
+	}
+	
 	private void log(String text) {
 		System.out.println("[WebConversation#"+id+"] "+text);
 	}
