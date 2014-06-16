@@ -6,10 +6,10 @@
 <h:body>
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
-      <article>
-        This is JTrack EE7 <br />
-        <br />
-      </article>
+        <h:panelGrid columns="2" rendered="#{not empty webconversation.successMessage}">
+            <h:outputText value="#{webconversation.successMessage}"/>
+            <image src="resources/success.png"/>
+        </h:panelGrid>
     </ui:define>
   </ui:composition>
 </h:body>

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity(name="bugs")
 public class Bug {
@@ -20,17 +21,17 @@ public class Bug {
 	private Date created;
 
 	private Date lastchange;
-
-	private Date deadline;
 	
 	@NotNull
+	@Size(min=5, max=40)
 	private String title;
 	
 	@NotNull
+	@Size(min=5, max=400)
 	private String description;
 
 	@Enumerated(EnumType.STRING)
-	private TrackSate state;
+	private TrackState state;
 
 	public Long getBugid() {
 		return bugid;
@@ -56,19 +57,11 @@ public class Bug {
 		this.lastchange = lastchange;
 	}
 
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
-
-	public TrackSate getState() {
+	public TrackState getState() {
 		return state;
 	}
 
-	public void setState(TrackSate state) {
+	public void setState(TrackState state) {
 		this.state = state;
 	}
 
@@ -91,7 +84,7 @@ public class Bug {
 	@Override
 	public String toString() {
 		return "Bug [bugid=" + bugid + ", created=" + created + ", lastchange="
-				+ lastchange + ", deadline=" + deadline + ", title=" + title
+				+ lastchange + ", title=" + title
 				+ ", description=" + description + ", state=" + state + "]";
 	}
 

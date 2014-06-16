@@ -1,5 +1,5 @@
 package itf.jtrack.model;
 
-public enum TrackSate {
+public enum TrackState {
 	NEW,ASSIGNED,FIXED,CLOSED
 }

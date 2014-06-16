@@ -8,13 +8,35 @@
     <ui:define name="content">
     <h:form>
         <h:panelGrid columns="3">
+
+            <h:outputText value="Bugid: "/>
+            <h:outputText id="bugid" value="#{webconversation.bug.bugid}"/>
+            <h:message for="bugid"/>
+
+
             <h:outputText value="Title: "/>
             <h:inputText id="title" value="#{webconversation.bug.title}"/>
             <h:message for="title"/>
             
+            <h:outputText value="Created: "/>
+            <h:outputText id="created" value="#{webconversation.bug.created}"/>
+            <h:message for="created"/>
+            
+            <h:outputText value="Last Change: "/>
+            <h:outputText id="lastchange" value="#{webconversation.bug.lastchange}"/>
+            <h:message for="lastchange"/>
+            
+            <h:outputText value="State: "/>
+            <h:selectOneMenu id="state" value="#{webconversation.bug.state}">
+                  <f:selectItems value="#{webconversation.trackStates}" />
+            </h:selectOneMenu>
+            <h:message for="state"/>
+            
             <h:outputText value="Description: "/>
             <h:inputText id="description" value="#{webconversation.bug.description}"/>
             <h:message for="description"/>
+            
+            
         </h:panelGrid>
         <h:commandButton value="Save" action="#{webconversation.saveBug()}"/>
     </h:form>

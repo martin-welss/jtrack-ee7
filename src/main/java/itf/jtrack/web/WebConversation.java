@@ -3,6 +3,7 @@ package itf.jtrack.web;
 import itf.jtrack.managers.BugManager;
 import itf.jtrack.model.Bug;
 import itf.jtrack.model.Component;
+import itf.jtrack.model.TrackState;
 import itf.jtrack.model.User;
 
 import java.io.BufferedReader;
@@ -29,6 +30,7 @@ public class WebConversation implements Serializable {
 	private Component component=new Component();
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
+	private String successMessage;
 	
 	public WebConversation() {
 		id=conversation_counter++;
@@ -82,17 +84,31 @@ public class WebConversation implements Serializable {
 	}
 
 	public String newBug() {
+		successMessage="";
 		bug=new Bug();
 		return "editbug";
 	}
 	
 	public String saveBug() {
-		bugman.save(bug);
+		bug=bugman.save(bug);
+		successMessage="Bug saved.";
 		return "index";
+	}
+	
+	public TrackState[] getTrackStates() {
+		return TrackState.values();
 	}
 	
 	private void log(String text) {
 		System.out.println("[WebConversation#"+id+"] "+text);
+	}
+
+	public String getSuccessMessage() {
+		return successMessage;
+	}
+
+	public void setSuccessMessage(String successMessage) {
+		this.successMessage = successMessage;
 	}
         
 }
