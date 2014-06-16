@@ -10,21 +10,40 @@
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:500,700' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body>
-    <img src="./resources/bug.png"/>
     <nav>
     <h:form>
-        <h:commandLink value="Start" action="index"/>
-        <h:commandLink value="New Bug" action="#{webconversation.newBug()}"/>
-        <h:commandLink value="Search Bugs" action="search"/>
-        <h:commandLink value="Configure Users" action="useradmin"/>
-        <h:commandLink value="Configure Components" action="componentadmin"/>
-        <h:link value="New Tab" outcome="index.xhtml" target="_blank"/>
+        <h:commandLink action="index">
+            <img src="./resources/bug.png" title="Startpage"/>
+        </h:commandLink>
+
+        <h:commandLink action="#{webconversation.newBug()}">
+            <img class="menuimg" src="./resources/newbug.png" title="New Bug"/>
+        </h:commandLink>
+
+        <h:commandLink action="search">
+            <img class="menuimg" src="./resources/search.png" title="Search Bugs"/>
+        </h:commandLink>
+
+        <h:commandLink action="useradmin">
+            <img class="menuimg" src="./resources/system-users.png" title="Configure Users"/>
+        </h:commandLink>
+
+        <h:commandLink action="componentadmin">
+            <img class="menuimg" src="./resources/component.png" title="Configure Components"/>
+        </h:commandLink>
+
+        <h:link outcome="index.xhtml" target="_blank">
+            <img class="menuimg" src="./resources/newtab.png" title="New Tab"/>
+        </h:link>
     </h:form>
     </nav>
     <ui:insert name="content">
     Missing Content
     </ui:insert>
 
-        <h:outputText value="#{webconversation.buildId}" /><br/>
+    <footer>
+        <h:outputText value="jtrack-ee7 #{webconversation.buildId}" />
+    </footer>
+
     </h:body>
 </html>

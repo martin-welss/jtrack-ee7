@@ -7,17 +7,13 @@
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
     <h:form>
-        <h:panelGrid columns="3">
+        <h2>#{webconversation.bug.bugid==null ? 'New Bug' : 'Edit Bug'}</h2>
+        <h:panelGrid columns="3" rowClasses="skyrow,cronrow" cellspacing="0" cellpadding="5">
 
             <h:outputText value="Bugid: "/>
             <h:outputText id="bugid" value="#{webconversation.bug.bugid}"/>
             <h:message for="bugid"/>
 
-
-            <h:outputText value="Title: "/>
-            <h:inputText id="title" value="#{webconversation.bug.title}"/>
-            <h:message for="title"/>
-            
             <h:outputText value="Created: "/>
             <h:outputText id="created" value="#{webconversation.bug.created}"/>
             <h:message for="created"/>
@@ -26,6 +22,10 @@
             <h:outputText id="lastchange" value="#{webconversation.bug.lastchange}"/>
             <h:message for="lastchange"/>
             
+            <h:outputText value="Title: "/>
+            <h:inputText id="title" value="#{webconversation.bug.title}"/>
+            <h:message for="title"/>
+            
             <h:outputText value="State: "/>
             <h:selectOneMenu id="state" value="#{webconversation.bug.state}">
                   <f:selectItems value="#{webconversation.trackStates}" />
@@ -33,12 +33,16 @@
             <h:message for="state"/>
             
             <h:outputText value="Description: "/>
-            <h:inputText id="description" value="#{webconversation.bug.description}"/>
+            <h:inputTextarea id="description" value="#{webconversation.bug.description}" cols="50" rows="8"/>
             <h:message for="description"/>
             
             
         </h:panelGrid>
-        <h:commandButton value="Save" action="#{webconversation.saveBug()}"/>
+        <p/>
+        <h:panelGrid columns="2">
+            <h:commandLink class="button" value="Cancel" action="index" immediate="true"/>
+            <h:commandLink class="button" value="Save" action="#{webconversation.saveBug()}"/>
+        </h:panelGrid>
     </h:form>
     </ui:define>
   </ui:composition>
