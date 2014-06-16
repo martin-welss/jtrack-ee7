@@ -67,15 +67,16 @@ war {
 	}
 }
 
-task deploy(dependsOn: war) {
+task deploy(dependsOn: war) << {
 		def warfile="$buildDir/libs/${project.name}.war"
 		def cmd="$System.env.JBOSS_HOME"+"/bin/jboss-cli.sh"
-
 		def process="$cmd --connect --command=\"deploy --force $warfile\"".execute()
+		println "start deployment of $warfile..."
 		process.waitFor()
 		if(process.exitValue()!=0) {
 			thow new RuntimeException("deploy failed of $warfile");
 		}
+		println("deploy done.")
 				
 }
 	

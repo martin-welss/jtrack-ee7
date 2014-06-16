@@ -120,6 +120,20 @@ public class WebConversation implements Serializable {
 		return userman.findAll();
 	}
 	
+	public String editUser(long userid) {
+		successMessage="";
+		user=userman.find(userid);
+		return "useradmin";
+	}
 	
+	public String newUser() {
+		user=new User();
+		return "useradmin";
+	}
 	
+	public String saveUser() {
+		userman.save(user);
+		successMessage="User saved.";
+		return "index";
+	}
 }

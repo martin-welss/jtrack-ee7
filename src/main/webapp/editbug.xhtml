@@ -8,7 +8,7 @@
     <ui:define name="content">
     <h:form>
         <h2>#{webconversation.bug.bugid==null ? 'New Bug' : 'Edit Bug'}</h2>
-        <h:panelGrid columns="3" rowClasses="skyrow,cronrow" cellspacing="0" cellpadding="5">
+        <h:panelGrid class="panel" columns="3" rowClasses="skyrow,cronrow" cellspacing="0" cellpadding="5">
 
             <h:outputText value="Bugid: "/>
             <h:outputText id="bugid" value="#{webconversation.bug.bugid}"/>

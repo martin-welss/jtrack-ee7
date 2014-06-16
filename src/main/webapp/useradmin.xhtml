@@ -7,7 +7,8 @@
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
     <h2>Configure Users</h2>
-    <h:dataTable value="#{webconversation.users}" var="u" rowClasses="skyrow, cornrow" cellspacing="5">
+    <h:form>
+    <h:dataTable class="panel" value="#{webconversation.users}" var="u" rowClasses="skyrow, cornrow" cellspacing="5">
         <h:column>
             <f:facet name="header">Id</f:facet>
             #{u.userid}
@@ -20,7 +21,38 @@
             <f:facet name="header">Email</f:facet>
             #{u.email}
         </h:column>
+        <h:column>
+            <f:facet name="header">Action</f:facet>
+            <h:commandLink value="Edit" action="#{webconversation.editUser(u.userid)}"/>
+        </h:column>
     </h:dataTable>
+    </h:form>
+    <p/>
+    <h2>#{webconversation.user.userid==null ? 'New User' : 'Edit User'}</h2>
+    <h:form>
+            <h:panelGrid class="panel" columns="3" rowClasses="skyrow,cornrow" cellspacing="0" cellpadding="5">
+
+            <h:outputText value="userid: "/>
+            <h:outputText id="userid" value="#{webconversation.user.userid}"/>
+            <h:message for="userid"/>
+
+            <h:outputText value="Name: "/>
+            <h:inputText id="name" value="#{webconversation.user.name}"/>
+            <h:message for="name"/>
+                        
+            <h:outputText value="Email: "/>
+            <h:inputText id="email" value="#{webconversation.user.email}"/>
+            <h:message for="email"/>
+            
+            </h:panelGrid>
+        <p/>
+        <h:panelGrid columns="3">
+            <h:commandLink class="button" value="Cancel" action="index" immediate="true"/>
+            <h:commandLink class="button" value="New" action="#{webconversation.newUser()}"/>
+            <h:commandLink class="button" value="Save" action="#{webconversation.saveUser()}"/>
+        </h:panelGrid>
+    
+    </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

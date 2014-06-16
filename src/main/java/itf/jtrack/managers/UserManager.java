@@ -25,6 +25,10 @@ public class UserManager {
 		return em.createQuery("select u from users u").getResultList();
 	}
 	
+	public User find(long userid) {
+		return em.find(User.class, userid);
+	}
+	
 	private void log(String text) {
 		System.out.println("[UserManager]: "+text);
 	}

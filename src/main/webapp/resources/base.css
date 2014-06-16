@@ -31,7 +31,8 @@ nav a {
 }
 
 .skyrow {
-  background: skyblue;
+  /* background: skyblue; */ 
+  background-image: linear-gradient(skyblue, cornflowerblue);
 }
 
 .cornrow {
@@ -79,4 +80,8 @@ footer {
 .button:active {
    border-top-color: #1b435e;
    background: #1b435e;
+}
+
+.panel {
+  /* border:2px solid skyblue; */
 }
