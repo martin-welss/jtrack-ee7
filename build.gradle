@@ -67,16 +67,16 @@ war {
 	}
 }
 
-task deploy(dependsOn: war, type: Copy) {
-		println "configure task deploy"
-		from('build/libs/') {
-			include '*.war'
+task deploy(dependsOn: war) {
+		def warfile="$buildDir/libs/${project.name}.war"
+		def cmd="$System.env.JBOSS_HOME"+"/bin/jboss-cli.sh"
+
+		def process="$cmd --connect --command=\"deploy --force $warfile\"".execute()
+		process.waitFor()
+		if(process.exitValue()!=0) {
+			thow new RuntimeException("deploy failed of $warfile");
 		}
-		into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
-		
-		doLast {
-			println "executed."
-		}
+				
 }
 	
 task show << {
@@ -84,7 +84,7 @@ task show << {
  }
 
 
-task droptables(dependsOn: show) << {
+task loadDB(dependsOn: deploy) << {
 	new File("${System.properties.'user.home'}/system.properties").withInputStream {
 		System.properties.load(it)
 	}
@@ -92,9 +92,9 @@ task droptables(dependsOn: show) << {
 	def sql= Sql.newInstance("${System.properties.'exampleds.jdbc.url'}",
 					    "${System.properties.'exampleds.user'}",
 						"${System.properties.'exampleds.password'}")
-	sql.execute("drop table tracks if exists")
-	sql.execute("drop table users if exists")
-	sql.execute("drop table components if exists")
+	sql.execute("insert into users (name,email) values ('mick', 'mick@test.com')")
+	sql.execute("insert into users (name,email) values ('alice', 'alice@test.com')")
+	sql.execute("insert into users (name,email) values ('donald', 'don@test.com')")
 	sql.close()
 }
 

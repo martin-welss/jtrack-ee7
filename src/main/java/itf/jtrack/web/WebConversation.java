@@ -1,6 +1,8 @@
 package itf.jtrack.web;
 
 import itf.jtrack.managers.BugManager;
+import itf.jtrack.managers.ComponentManager;
+import itf.jtrack.managers.UserManager;
 import itf.jtrack.model.Bug;
 import itf.jtrack.model.Component;
 import itf.jtrack.model.TrackState;
@@ -10,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
@@ -30,6 +33,8 @@ public class WebConversation implements Serializable {
 	private Component component=new Component();
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
+	@Inject private UserManager userman;
+	@Inject private ComponentManager compoman;
 	private String successMessage;
 	
 	public WebConversation() {
@@ -110,5 +115,11 @@ public class WebConversation implements Serializable {
 	public void setSuccessMessage(String successMessage) {
 		this.successMessage = successMessage;
 	}
-        
+    
+	public List<User> getUsers() {
+		return userman.findAll();
+	}
+	
+	
+	
 }

@@ -6,10 +6,21 @@
 <h:body>
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
-      <article>
-        This is Useradmin <br />
-        <br />
-      </article>
+    <h2>Configure Users</h2>
+    <h:dataTable value="#{webconversation.users}" var="u" rowClasses="skyrow, cornrow" cellspacing="5">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{u.userid}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{u.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Email</f:facet>
+            #{u.email}
+        </h:column>
+    </h:dataTable>
     </ui:define>
   </ui:composition>
 </h:body>

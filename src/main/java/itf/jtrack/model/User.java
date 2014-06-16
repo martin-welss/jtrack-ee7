@@ -1,5 +1,6 @@
 package itf.jtrack.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class User {
 	private Long userid;
 	
 	@NotNull
-	@Size(max=30)
+	@Column(unique=true)
+	@Size(min=2, max=30)
 	private String name;
 
 	private String email;
@@ -42,6 +44,12 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", name=" + name + ", email=" + email
+				+ "]";
 	}
 
 }
