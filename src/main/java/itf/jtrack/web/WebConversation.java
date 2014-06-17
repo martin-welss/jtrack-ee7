@@ -34,7 +34,7 @@ public class WebConversation implements Serializable {
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
 	@Inject private UserManager userman;
-	@Inject private ComponentManager compoman;
+	@Inject private ComponentManager componentman;
 	private String successMessage;
 	
 	public WebConversation() {
@@ -136,4 +136,27 @@ public class WebConversation implements Serializable {
 		successMessage="User saved.";
 		return "index";
 	}
+
+	public List<Component> getComponents() {
+		return componentman.findAll();
+	}
+	
+	public String editComponent(long componentid) {
+		successMessage="";
+		component=componentman.find(componentid);
+		return "componentadmin";
+	}
+	
+	public String newComponent() {
+		component=new Component();
+		return "componentadmin";
+	}
+	
+	public String saveComponent() {
+		componentman.save(component);
+		successMessage="Component saved.";
+		return "index";
+	}
+
+
 }
