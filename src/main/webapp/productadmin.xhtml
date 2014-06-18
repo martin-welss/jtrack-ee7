@@ -6,12 +6,12 @@
 <h:body>
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
-    <h2>Configure Components</h2>
+    <h2>Configure Products</h2>
     <h:form>
-    <h:dataTable class="panel" value="#{webconversation.components}" var="c" rowClasses="skyrow, cornrow" cellspacing="5">
+    <h:dataTable class="panel" value="#{webconversation.products}" var="c" rowClasses="skyrow, cornrow" cellspacing="5">
         <h:column>
             <f:facet name="header">Id</f:facet>
-            #{c.componentid}
+            #{c.productid}
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
@@ -19,29 +19,29 @@
         </h:column>
         <h:column>
             <f:facet name="header">Action</f:facet>
-            <h:commandLink value="Edit" action="#{webconversation.editComponent(c.componentid)}"/>
+            <h:commandLink value="Edit" action="#{webconversation.editProduct(c.productid)}"/>
         </h:column>
     </h:dataTable>
     </h:form>
     <p/>
-    <h2>#{webconversation.component.componentid==null ? 'New Component' : 'Edit Component'}</h2>
+    <h2>#{webconversation.product.productid==null ? 'New Product' : 'Edit Product'}</h2>
     <h:form>
             <h:panelGrid class="panel" columns="3" rowClasses="skyrow,cornrow" cellspacing="0" cellpadding="5">
 
-            <h:outputText value="componentid: "/>
-            <h:outputText id="componentid" value="#{webconversation.component.componentid}"/>
-            <h:message for="componentid"/>
+            <h:outputText value="productid: "/>
+            <h:outputText id="productid" value="#{webconversation.product.productid}"/>
+            <h:message for="productid"/>
 
             <h:outputText value="Name: "/>
-            <h:inputText id="name" value="#{webconversation.component.name}"/>
+            <h:inputText id="name" value="#{webconversation.product.name}"/>
             <h:message for="name"/>
                         
             </h:panelGrid>
         <p/>
         <h:panelGrid columns="3">
             <h:commandLink class="button" value="Cancel" action="index" immediate="true"/>
-            <h:commandLink class="button" value="New" action="#{webconversation.newComponent()}"/>
-            <h:commandLink class="button" value="Save" action="#{webconversation.saveComponent()}"/>
+            <h:commandLink class="button" value="New" action="#{webconversation.newProduct()}"/>
+            <h:commandLink class="button" value="Save" action="#{webconversation.saveProduct()}"/>
         </h:panelGrid>
     
     </h:form>

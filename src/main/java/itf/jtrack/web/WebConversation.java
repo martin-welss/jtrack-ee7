@@ -1,10 +1,10 @@
 package itf.jtrack.web;
 
 import itf.jtrack.managers.BugManager;
-import itf.jtrack.managers.ComponentManager;
+import itf.jtrack.managers.ProductManager;
 import itf.jtrack.managers.UserManager;
 import itf.jtrack.model.Bug;
-import itf.jtrack.model.Component;
+import itf.jtrack.model.Product;
 import itf.jtrack.model.TrackState;
 import itf.jtrack.model.User;
 
@@ -30,11 +30,11 @@ public class WebConversation implements Serializable {
 	private int id;
 	private User user=new User();
 	private Bug bug=new Bug();
-	private Component component=new Component();
+	private Product product=new Product();
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
 	@Inject private UserManager userman;
-	@Inject private ComponentManager componentman;
+	@Inject private ProductManager prodman;
 	private String successMessage;
 	
 	public WebConversation() {
@@ -64,12 +64,12 @@ public class WebConversation implements Serializable {
 		this.bug = bug;
 	}
 
-	public Component getComponent() {
-		return component;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setComponent(Component component) {
-		this.component = component;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public String getBuildId() {
@@ -91,6 +91,9 @@ public class WebConversation implements Serializable {
 	public String newBug() {
 		successMessage="";
 		bug=new Bug();
+		bug.setReporter(new User());
+		bug.setAssignee(new User());
+		bug.setProduct(new Product());
 		return "editbug";
 	}
 	
@@ -137,26 +140,25 @@ public class WebConversation implements Serializable {
 		return "index";
 	}
 
-	public List<Component> getComponents() {
-		return componentman.findAll();
+	public List<Product> getProducts() {
+		return prodman.findAll();
 	}
 	
-	public String editComponent(long componentid) {
+	public String editProduct(long productid) {
 		successMessage="";
-		component=componentman.find(componentid);
-		return "componentadmin";
+		product=prodman.find(productid);
+		return "productadmin";
 	}
 	
-	public String newComponent() {
-		component=new Component();
-		return "componentadmin";
+	public String newProduct() {
+		product=new Product();
+		return "productadmin";
 	}
 	
-	public String saveComponent() {
-		componentman.save(component);
-		successMessage="Component saved.";
+	public String saveProduct() {
+		prodman.save(product);
+		successMessage="Product saved.";
 		return "index";
 	}
-
 
 }

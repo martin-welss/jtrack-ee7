@@ -96,9 +96,9 @@ task loadDB(dependsOn: deploy) << {
 	sql.execute("insert into users (name,email) values ('mick', 'mick@test.com')")
 	sql.execute("insert into users (name,email) values ('alice', 'alice@test.com')")
 	sql.execute("insert into users (name,email) values ('donald', 'don@test.com')")
-	sql.execute("insert into components (name) values ('Database')")
-	sql.execute("insert into components (name) values ('GUI')")
-	sql.execute("insert into components (name) values ('Workflow')")
+	sql.execute("insert into products (name) values ('Database')")
+	sql.execute("insert into products (name) values ('GUI')")
+	sql.execute("insert into products (name) values ('Workflow')")
 	sql.close()
 }
 

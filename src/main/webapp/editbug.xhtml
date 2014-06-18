@@ -22,6 +22,24 @@
             <h:outputText id="lastchange" value="#{webconversation.bug.lastchange}"/>
             <h:message for="lastchange"/>
             
+            <h:outputText value="Reporter: "/>
+            <h:selectOneMenu id="reporter" value="#{webconversation.bug.reporter.userid}">
+                <f:selectItems value="#{webconversation.users}" var="user" itemValue="#{user.userid}"  itemLabel="#{user.name}" />
+            </h:selectOneMenu>
+            <h:message for="reporter"/>
+            
+            <h:outputText value="Product: "/>
+            <h:selectOneMenu id="product" value="#{webconversation.bug.product.productid}">
+                <f:selectItems value="#{webconversation.products}" var="product" itemValue="#{product.productid}"  itemLabel="#{product.name}" />
+            </h:selectOneMenu>
+            <h:message for="product"/>
+            
+            <h:outputText value="Assignee: "/>
+            <h:selectOneMenu id="assignee" value="#{webconversation.bug.assignee.userid}">
+                <f:selectItems value="#{webconversation.users}" var="user" itemValue="#{user.userid}"  itemLabel="#{user.name}" />
+            </h:selectOneMenu>
+            <h:message for="assignee"/>
+            
             <h:outputText value="Title: "/>
             <h:inputText id="title" value="#{webconversation.bug.title}"/>
             <h:message for="title"/>

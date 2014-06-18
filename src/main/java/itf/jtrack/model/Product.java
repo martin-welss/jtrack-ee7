@@ -7,23 +7,23 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity(name="components")
-public class Component {
+@Entity(name="products")
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long componentid;
+	private Long productid;
 	
 	@NotNull
 	@Size(max=30)
 	private String name;
 
-	public Long getComponentid() {
-		return componentid;
+	public Long getProductid() {
+		return productid;
 	}
 
-	public void setComponentid(Long componentid) {
-		this.componentid = componentid;
+	public void setProductid(Long productid) {
+		this.productid = productid;
 	}
 
 	public String getName() {

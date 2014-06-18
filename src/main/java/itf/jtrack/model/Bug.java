@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,7 +33,16 @@ public class Bug {
 
 	@Enumerated(EnumType.STRING)
 	private TrackState state;
+	
+	@ManyToOne
+	private User reporter;
 
+	@ManyToOne
+	private User assignee;
+	
+	@ManyToOne
+	private Product product;
+	
 	public Long getBugid() {
 		return bugid;
 	}
@@ -86,6 +96,30 @@ public class Bug {
 		return "Bug [bugid=" + bugid + ", created=" + created + ", lastchange="
 				+ lastchange + ", title=" + title
 				+ ", description=" + description + ", state=" + state + "]";
+	}
+
+	public User getReporter() {
+		return reporter;
+	}
+
+	public void setReporter(User reporter) {
+		this.reporter = reporter;
+	}
+
+	public User getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	
