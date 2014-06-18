@@ -8,9 +8,31 @@
     <ui:define name="content">
         <h:panelGrid columns="2" rendered="#{not empty webconversation.successMessage}">
             <h:outputText value="#{webconversation.successMessage}"/>
-            <image src="resources/success.png"/>
+            <img src="resources/success.png"/>
         </h:panelGrid>
-        <h2>Overview</h2>
+        <h2>Recently Changed</h2>
+        <h:form>
+          <h:dataTable class="panel" value="#{webconversation.recentlyChangedBugs}" var="b" rowClasses="skyrow, cornrow" cellspacing="5">
+              <h:column>
+                  <f:facet name="header">Id</f:facet>
+                  #{b.bugid}
+              </h:column>
+              <h:column>
+                  <f:facet name="header">Title</f:facet>
+                  <h:commandLink action="#{webconversation.editBug(b.bugid)}" value="#{b.title}"/>
+              </h:column>
+              <h:column>
+                  <f:facet name="header">State</f:facet>
+                  #{b.state}
+              </h:column>
+              <h:column>
+                  <f:facet name="header">Last Change</f:facet>
+                  <h:outputText value="#{b.lastchange}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                  </h:outputText>
+              </h:column>
+            </h:dataTable>
+          </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

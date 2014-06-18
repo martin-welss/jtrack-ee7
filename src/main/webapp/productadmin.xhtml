@@ -8,18 +8,18 @@
     <ui:define name="content">
     <h2>Configure Products</h2>
     <h:form>
-    <h:dataTable class="panel" value="#{webconversation.products}" var="c" rowClasses="skyrow, cornrow" cellspacing="5">
+    <h:dataTable class="panel" value="#{webconversation.products}" var="p" rowClasses="skyrow, cornrow" cellspacing="5">
         <h:column>
             <f:facet name="header">Id</f:facet>
-            #{c.productid}
+            #{p.productid}
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
-            #{c.name}
+            #{p.name}
         </h:column>
         <h:column>
             <f:facet name="header">Action</f:facet>
-            <h:commandLink value="Edit" action="#{webconversation.editProduct(c.productid)}"/>
+            <h:commandLink value="Edit" action="#{webconversation.editProduct(p.productid)}"/>
         </h:column>
     </h:dataTable>
     </h:form>
@@ -28,7 +28,7 @@
     <h:form>
             <h:panelGrid class="panel" columns="3" rowClasses="skyrow,cornrow" cellspacing="0" cellpadding="5">
 
-            <h:outputText value="productid: "/>
+            <h:outputText value="Productid: "/>
             <h:outputText id="productid" value="#{webconversation.product.productid}"/>
             <h:message for="productid"/>
 

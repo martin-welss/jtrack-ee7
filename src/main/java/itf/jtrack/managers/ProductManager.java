@@ -20,9 +20,8 @@ public class ProductManager {
 		return em.merge(prod);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Product> findAll() {
-		return em.createQuery("select p from products p").getResultList();
+		return em.createQuery("select p from products p", Product.class).getResultList();
 	}
 	
 	public Product find(long productid) {

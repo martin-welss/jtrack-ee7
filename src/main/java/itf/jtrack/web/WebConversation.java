@@ -30,6 +30,7 @@ public class WebConversation implements Serializable {
 	private int id;
 	private User user=new User();
 	private Bug bug=new Bug();
+	private Bug criteria=new Bug();
 	private Product product=new Product();
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
@@ -97,6 +98,12 @@ public class WebConversation implements Serializable {
 		return "editbug";
 	}
 	
+	public String editBug(long bugid) {
+		successMessage="";
+		bug=bugman.find(bugid);
+		return "editbug";
+	}
+	
 	public String saveBug() {
 		bug=bugman.save(bug);
 		successMessage="Bug saved.";
@@ -161,4 +168,16 @@ public class WebConversation implements Serializable {
 		return "index";
 	}
 
+	public List<Bug> getRecentlyChangedBugs() {
+		return bugman.getRecentlyChangedBugs();
+	}
+
+	public Bug getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(Bug criteria) {
+		this.criteria = criteria;
+	}
+	
 }

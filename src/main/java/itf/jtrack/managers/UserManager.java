@@ -20,9 +20,8 @@ public class UserManager {
 		return em.merge(user);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<User> findAll() {
-		return em.createQuery("select u from users u").getResultList();
+		return em.createQuery("select u from users u", User.class).getResultList();
 	}
 	
 	public User find(long userid) {
