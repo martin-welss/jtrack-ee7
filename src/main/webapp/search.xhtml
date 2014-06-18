@@ -6,10 +6,77 @@
 <h:body>
   <ui:composition template="./WEB-INF/template.xhtml">
     <ui:define name="content">
-      <article>
-        This is Search <br />
-        <br />
-      </article>
+    <h:form>
+        <h2>Search Bugs</h2>
+        <h:panelGrid class="panel" columns="3" rowClasses="skyrow,cronrow" cellspacing="0" cellpadding="5">
+
+            <h:outputText value="Bugid: "/>
+            <h:inputText id="bugid" value="#{webconversation.criteria.bugid}"/>
+            <h:message for="bugid"/>
+
+            <h:outputText value="Reporter: "/>
+            <h:selectOneMenu id="reporter" value="#{webconversation.criteria.reporter.userid}">
+                <f:selectItems value="#{webconversation.users}" var="user" itemValue="#{user.userid}"  itemLabel="#{user.name}" />
+            </h:selectOneMenu>
+            <h:message for="reporter"/>
+            
+            <h:outputText value="Product: "/>
+            <h:selectOneMenu id="product" value="#{webconversation.criteria.product.productid}">
+                <f:selectItems value="#{webconversation.products}" var="product" itemValue="#{product.productid}"  itemLabel="#{product.name}" />
+            </h:selectOneMenu>
+            <h:message for="product"/>
+            
+            <h:outputText value="Assignee: "/>
+            <h:selectOneMenu id="assignee" value="#{webconversation.criteria.assignee.userid}">
+                <f:selectItems value="#{webconversation.users}" var="user" itemValue="#{user.userid}"  itemLabel="#{user.name}" />
+            </h:selectOneMenu>
+            <h:message for="assignee"/>
+            
+            <h:outputText value="Title: "/>
+            <h:inputText id="title" value="#{webconversation.criteria.title}" size="40"/>
+            <h:message for="title"/>
+            
+            <h:outputText value="State: "/>
+            <h:selectOneMenu id="state" value="#{webconversation.criteria.state}">
+                  <f:selectItems value="#{webconversation.trackStates}" />
+            </h:selectOneMenu>
+            <h:message for="state"/>
+            
+            <h:outputText value="Description: "/>
+            <h:inputText id="description" value="#{webconversation.criteria.description}" size="40"/>
+            <h:message for="description"/>
+            
+            
+        </h:panelGrid>
+        <p/>
+        <h:panelGrid columns="2">
+            <h:commandLink class="button" value="Reset" action="#{webconversation.resetSearch()}" immediate="true" />
+            <h:commandLink class="button" value="Search" action="#{webconversation.search()}" immediate="true" />
+        </h:panelGrid>
+        <p/>
+        <h2>Search Results</h2>
+          <h:dataTable class="panel" value="#{webconversation.searchResults}" var="b" rowClasses="skyrow, cornrow" cellspacing="5">
+              <h:column>
+                  <f:facet name="header">Id</f:facet>
+                  #{b.bugid}
+              </h:column>
+              <h:column>
+                  <f:facet name="header">Title</f:facet>
+                  <h:commandLink action="#{webconversation.editBug(b.bugid)}" value="#{b.title}"/>
+              </h:column>
+              <h:column>
+                  <f:facet name="header">State</f:facet>
+                  #{b.state}
+              </h:column>
+              <h:column>
+                  <f:facet name="header">Last Change</f:facet>
+                  <h:outputText value="#{b.lastchange}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                  </h:outputText>
+              </h:column>
+            </h:dataTable>
+        
+    </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

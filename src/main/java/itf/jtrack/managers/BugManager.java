@@ -9,6 +9,9 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 @Stateless
 @Named(value="bugmanager")
@@ -35,6 +38,14 @@ public class BugManager {
 	
 	private void log(String text) {
 		System.out.println("[BugManager]: "+text);
+	}
+
+	public List<Bug> search(Bug criteria) {
+		CriteriaBuilder builder=em.getCriteriaBuilder();
+		CriteriaQuery<Bug> criteriaquery =builder.createQuery(Bug.class);
+		Root<Bug> root=criteriaquery.from(Bug.class);
+		criteriaquery.select(root);
+		return em.createQuery(criteriaquery).getResultList();
 	}
 	
 	

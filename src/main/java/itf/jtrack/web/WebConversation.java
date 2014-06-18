@@ -37,6 +37,7 @@ public class WebConversation implements Serializable {
 	@Inject private UserManager userman;
 	@Inject private ProductManager prodman;
 	private String successMessage;
+	private List<Bug> searchResults;
 	
 	public WebConversation() {
 		id=conversation_counter++;
@@ -47,8 +48,17 @@ public class WebConversation implements Serializable {
 	public void initialize() {
 		conversation.begin();
 		log("postConstruct()");
+		resetSearch();
 	}
 	
+	public void resetSearch() {
+		criteria=new Bug();
+		criteria.setAssignee(new User());
+		criteria.setReporter(new User());
+		criteria.setProduct(new Product());
+		searchResults=null;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -180,4 +190,12 @@ public class WebConversation implements Serializable {
 		this.criteria = criteria;
 	}
 	
+	public List<Bug> search() {
+		searchResults=bugman.search(criteria);
+		return null;
+	}
+
+	public List<Bug> getSearchResults() {
+		return searchResults;
+	}
 }
