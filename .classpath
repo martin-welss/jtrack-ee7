@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/groovy"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
 	<classpathentry kind="con" path="org.springsource.ide.eclipse.gradle.dsld.classpathcontainer"/>
 	<classpathentry kind="con" path="GROOVY_DSL_SUPPORT"/>
 	<classpathentry kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/enterprise/api/main/cdi-api-1.1.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/persistence/api/main/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/validation/api/main/validation-api-1.1.0.Final.jar"/>
-	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="var" path="JBOSS_HOME/modules/system/layers/base/javax/ws/rs/api/main/jaxrs-api-3.0.8.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
