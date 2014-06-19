@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -30,7 +31,7 @@ public class WebConversation implements Serializable {
 	private int id;
 	private User user=new User();
 	private Bug bug=new Bug();
-	private Bug criteria=new Bug();
+	private String pattern="";
 	private Product product=new Product();
 	@Inject private Conversation conversation; 
 	@Inject private BugManager bugman;
@@ -52,10 +53,7 @@ public class WebConversation implements Serializable {
 	}
 	
 	public void resetSearch() {
-		criteria=new Bug();
-		criteria.setAssignee(new User());
-		criteria.setReporter(new User());
-		criteria.setProduct(new Product());
+		pattern="";
 		searchResults=null;
 	}
 
@@ -182,16 +180,25 @@ public class WebConversation implements Serializable {
 		return bugman.getRecentlyChangedBugs();
 	}
 
-	public Bug getCriteria() {
-		return criteria;
+	public String getPattern() {
+		return pattern;
 	}
 
-	public void setCriteria(Bug criteria) {
-		this.criteria = criteria;
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
 	}
 	
 	public List<Bug> search() {
-		searchResults=bugman.search(criteria);
+		try {
+			Long bugid=Long.parseLong(pattern.trim());
+			searchResults=new ArrayList<Bug>();
+			searchResults.add(bugman.find(bugid));
+			return null;
+		}
+		catch(NumberFormatException x) {
+			log("no bugid: "+x);
+		}
+		searchResults=bugman.search(pattern);
 		return null;
 	}
 

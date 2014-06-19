@@ -67,18 +67,32 @@ war {
 	}
 }
 
-task deploy(dependsOn: war) << {
-		def warfile="$buildDir/libs/${project.name}.war"
-		def cmd="$System.env.JBOSS_HOME"+"/bin/jboss-cli.sh"
-		def process="$cmd --connect --command=\"deploy --force $warfile\"".execute()
-		println "start deployment of $warfile..."
-		process.waitFor()
-		if(process.exitValue()!=0) {
-			thow new RuntimeException("deploy failed of $warfile");
+
+task deploy(dependsOn: war, type: Copy) {
+	println "configure task deploy"
+	def target="${project.name}.war"
+	def ok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.deployed");
+	def nok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.failed");
+
+    if(ok.exists()) { ok.delete() }
+	if(nok.exists()) { nok.delete() }
+
+	from('build/libs/') {
+		include '*.war'
+	}
+	into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
+	
+	doLast {
+		println "executing wildfly deploy..."
+		for(def i=0;i<80;i++) {
+			if(ok.exists()) { break }
+			if(nok.exists()) { throw new RuntimeException("Deployment failed, see Wildfly logs!") }
+			sleep(500);
 		}
-		println("deploy done.")
-				
+		println("deploy ok.")
+	}
 }
+
 	
 task show << {
 	buildscript.configurations.classpath.each { println it }
