@@ -15,11 +15,15 @@
             <h:message for="bugid"/>
 
             <h:outputText value="Created: "/>
-            <h:outputText id="created" value="#{webconversation.bug.created}"/>
+            <h:outputText id="created" value="#{webconversation.bug.created}">
+                 <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+            </h:outputText>    
             <h:message for="created"/>
             
             <h:outputText value="Last Change: "/>
-            <h:outputText id="lastchange" value="#{webconversation.bug.lastchange}"/>
+            <h:outputText id="lastchange" value="#{webconversation.bug.lastchange}">
+                 <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+            </h:outputText>
             <h:message for="lastchange"/>
             
             <h:outputText value="Reporter: "/>
