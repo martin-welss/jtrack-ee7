@@ -4,6 +4,8 @@ apply plugin: 'war'
 	
 assert System.env.JBOSS_HOME!=null	
 
+def sysprops=new File("${System.properties.'user.home'}/system.properties")
+assert sysprops.exists()
 
 
 repositories {
@@ -21,6 +23,7 @@ dependencies {
 				          "$System.env.JBOSS_HOME/modules/system/layers/base/javax/enterprise/api/main/cdi-api-1.1.jar",
 						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/validation/api/main/validation-api-1.1.0.Final.jar",
 						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar",
+						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/ws/rs/api/main/jaxrs-api-3.0.8.Final.jar",
 						  "$System.env.JBOSS_HOME/modules/system/layers/base/javax/persistence/api/main/hibernate-jpa-2.1-api-1.0.0.Final.jar")
 
 	jdbcdriver 'com.h2database:h2:1.3.173','org.postgresql:postgresql:9.3-1100-jdbc41'
@@ -84,23 +87,21 @@ task deploy(dependsOn: war, type: Copy) {
 	
 	doLast {
 		println "executing wildfly deploy..."
+		def deployed=false
 		for(def i=0;i<80;i++) {
-			if(ok.exists()) { break }
-			if(nok.exists()) { throw new RuntimeException("Deployment failed, see Wildfly logs!") }
+			if(ok.exists()) { deployed=true; break }
+			if(nok.exists()) { break }
 			sleep(500);
 		}
-		println("deploy ok.")
+		if(deployed) { println("deploy ok.") }
+		else { throw new RuntimeException("Deployment failed, see Wildfly logs!") }
 	}
 }
 
 	
-task show << {
-	buildscript.configurations.classpath.each { println it }
- }
-
 
 task loadDB(dependsOn: deploy) << {
-	new File("${System.properties.'user.home'}/system.properties").withInputStream {
+	sysprops.withInputStream {
 		System.properties.load(it)
 	}
 	println "connecting to database: ${System.properties.'exampleds.jdbc.url'}\nas user: ${System.properties.'exampleds.user'}"
