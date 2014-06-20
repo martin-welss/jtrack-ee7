@@ -3,6 +3,7 @@ package itf.jtrack
 import spock.lang.Specification
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
+import java.util.Random
 import static groovyx.net.http.ContentType.*
 
 class RestfulSpec extends Specification {
@@ -31,9 +32,11 @@ class RestfulSpec extends Specification {
 		
 		setup:
 			def jtrack = new RESTClient( 'http://localhost:8080/jtrack-ee7/items/')
+			def random=new Random()
 		
 		when:
-			def user='{"name":"hanno","email":"hanno@test.com"}'
+			def uname="hanno"+random.nextInt(10000);
+			def user="""{"name": "$uname", "email":"hanno@test.com"}"""
 			def response = jtrack.post(
 				path : 'user',
 				body : user,
@@ -42,7 +45,7 @@ class RestfulSpec extends Specification {
 		then:
 			assert response.status == 200
 			assert response.contentType == JSON.toString()
-			assert response.data.name == "hanno"
+			assert response.data.name == uname
 			assert response.data.userid > 0
 										
 		println "finished test"

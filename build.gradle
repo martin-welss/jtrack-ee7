@@ -11,6 +11,7 @@ assert sysprops.exists()
 
 repositories {
 	mavenCentral()
+	maven { url 'http://repository.jboss.org/nexus/content/groups/public' }
 }
 
 configurations {
@@ -32,15 +33,18 @@ dependencies {
 	testCompile 'org.codehaus.groovy:groovy:2.0.6'
 	testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 	testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
-	
+	testCompile 'org.wildfly:wildfly-arquillian-container-remote:8.1.0.Final'
+	testCompile 'org.jboss.arquillian:arquillian-bom:1.1.4.Final'
+	testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.4.Final'
 }
 
 
-//we need the hack to satisfy the classloader conditions for javax.sql.DriverManager
+//we need this hack to satisfy the classloader conditions for javax.sql.DriverManager
 URLClassLoader loader = GroovyObject.class.classLoader
 configurations.jdbcdriver.each {File file ->
 	loader.addURL(file.toURI().toURL())
 }
+//Class.forName() is part of the above hack
 println "jdbc drivers: "+Class.forName("org.h2.Driver")+", "+Class.forName("org.postgresql.Driver")
 
 
