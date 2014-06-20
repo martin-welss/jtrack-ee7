@@ -31,6 +31,7 @@ dependencies {
 	
 	testCompile 'org.codehaus.groovy:groovy:2.0.6'
 	testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+	testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
 	
 }
 
@@ -77,20 +78,26 @@ war {
 
 task deploy(dependsOn: war, type: Copy) {
 	println "configure task deploy"
-	def target="${project.name}.war"
-	def ok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.deployed");
-	def nok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.failed");
-
-    if(ok.exists()) { ok.delete() }
-	if(nok.exists()) { nok.delete() }
-
+	
 	from('build/libs/') {
 		include '*.war'
 	}
 	into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
 	
+
+	def target="${project.name}.war"
+	def ok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.deployed");
+	def nok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.failed");
+	
+	doFirst {
+		println "deploy doFirst"
+		if(ok.exists()) { ok.delete() }
+		if(nok.exists()) { nok.delete() }
+	}
+	
 	doLast {
 		println "executing wildfly deploy..."
+
 		def deployed=false
 		for(def i=0;i<80;i++) {
 			if(ok.exists()) { deployed=true; break }
@@ -124,4 +131,6 @@ task loadDB(dependsOn: deploy) << {
 	sql.execute("insert into bugs (created, description, lastchange, state, title, assignee_userid, product_productid, reporter_userid) values ('2014-05-18 12:24:49.507', 'table headers are missing on table sales', '2014-06-18 09:24:49.507', 'FIXED', 'show table headers', 3, 2, 2)")
 	sql.close()
 }
+
+
 
