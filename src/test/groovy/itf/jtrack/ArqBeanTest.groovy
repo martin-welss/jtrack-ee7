@@ -1,44 +1,44 @@
-package itf.jtrack;
-
-import java.util.List;
-
-import javax.inject.Inject;
+package itf.jtrack
 
 import itf.jtrack.managers.ProductManager;
 import itf.jtrack.model.Product;
 
+import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.spock.ArquillianSputnik;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(Arquillian.class)
-public class ArqTest {
+import spock.lang.Specification;
+
+
+@RunWith(ArquillianSputnik.class)
+class ArqBeanTest extends Specification {
 
 	@Inject
 	ProductManager prodman;
 	
 	 @Deployment
-	 public static JavaArchive createDeployment() {
+	 def static JavaArchive "create deployment"() {
 		 return ShrinkWrap.create(JavaArchive.class)
 				 .addClass(Product.class)
 				 .addClass(ProductManager.class)
 				 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-		 		 .addAsManifestResource("persistence.xml");
+				 .addAsManifestResource("persistence.xml");
 	 }
 	
-	
-	@Test
-	public void firstTest() {
-		System.out.println("starting tests");
-		List<Product> prodlist=prodman.findAll();
-		Assert.assertTrue(prodlist.size()>0);
-		System.out.println("finish tests");
-	}
-	
-	
+	 def "test products"() {
+		 println "starting test"
+	 	
+		 when:
+		 	def prodlist=prodman.findAll();
+			 
+		 then:
+			assert prodlist.size() > 0
+
+		 println "finish test"
+	 }
 }

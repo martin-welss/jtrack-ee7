@@ -35,7 +35,7 @@ dependencies {
 	testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
 	testCompile 'org.wildfly:wildfly-arquillian-container-remote:8.1.0.Final'
 	testCompile 'org.jboss.arquillian:arquillian-bom:1.1.4.Final'
-	testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.4.Final'
+	testCompile 'org.jboss.arquillian.spock:arquillian-spock-container:1.0.0.Beta3'
 }
 
 
