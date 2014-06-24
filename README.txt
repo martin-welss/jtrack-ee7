@@ -25,7 +25,7 @@ Git tags are automatically associated:
 
 jtrack V_1_6 gd67182f B20140622 1851 mw
 
-The application displays the buildId in teh footer of its web pages, so you can always easily identify the binary your dealing with
+The application displays the buildId in the footer of its web pages, so you can always easily identify the binary your dealing with
 
 Deployment
 ==========
