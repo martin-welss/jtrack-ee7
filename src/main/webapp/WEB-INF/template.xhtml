@@ -10,6 +10,7 @@
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:500,700' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body>
+    <ui:insert name="navigation">
     <nav>
     <h:form>
         <h:commandLink action="index">
@@ -37,12 +38,14 @@
         </h:link>
     </h:form>
     </nav>
+    </ui:insert>
+    
     <ui:insert name="content">
     Missing Content
     </ui:insert>
 
     <footer>
-        <h:outputText value="jtrack-ee7 #{webconversation.buildId}" />
+        <h:outputText value="jtrack-ee7 #{jtrack.buildId}" />
     </footer>
 
     </h:body>

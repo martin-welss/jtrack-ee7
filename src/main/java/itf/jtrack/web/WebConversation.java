@@ -8,9 +8,6 @@ import itf.jtrack.model.Product;
 import itf.jtrack.model.TrackState;
 import itf.jtrack.model.User;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,6 @@ public class WebConversation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static int conversation_counter=1;
-	private static String buildId=null;
 	private int id;
 	private User user=new User();
 	private Bug bug=new Bug();
@@ -81,21 +77,6 @@ public class WebConversation implements Serializable {
 		this.product = product;
 	}
 
-	public String getBuildId() {
-		if(buildId==null) {
-			log("reading buildId");
-	        try {
-	        	InputStream str = getClass().getResourceAsStream("/META-INF/build_id.txt");
-	        	BufferedReader br=new BufferedReader(new InputStreamReader(str));
-	            buildId= br.readLine();
-	        }
-	        catch(Exception x) {
-	            log("oops."+x);
-		        buildId="no build_id";
-	        }
-		}
-		return buildId;
-	}
 
 	public String newBug() {
 		successMessage="";

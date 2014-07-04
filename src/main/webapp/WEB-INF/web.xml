@@ -29,6 +29,9 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
-        <location>index.xhtml</location>
+        <location>default.xhtml</location>
     </error-page>
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 </web-app>
