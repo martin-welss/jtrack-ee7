@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.CLIENT_WINDOW_MODE</param-name>
@@ -29,9 +29,9 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
-        <location>default.xhtml</location>
+        <location>/default.xhtml</location>
     </error-page>
     <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>60</session-timeout>
     </session-config>
 </web-app>
