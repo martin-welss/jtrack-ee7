@@ -7,7 +7,8 @@ It is meant to be used in conjunction with the project wildfly-git-install:
 
 https://github.com/martin-welss/wildfly-git-install
 
-which features a wildfly installation from a git repository and externalized local configuration
+which features a wildfly installation from a git repository and externalized local configuration.
+For this project, please use the postgres_branch of wildfly-git-install.
 
 BuildId
 =======
