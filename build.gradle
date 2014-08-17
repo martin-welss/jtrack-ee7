@@ -1,4 +1,5 @@
 import groovy.sql.Sql
+import java.sql.DriverManager
 
 apply plugin: 'war'
 apply plugin: 'groovy'
@@ -37,16 +38,6 @@ dependencies {
 	testCompile 'org.jboss.arquillian:arquillian-bom:1.1.4.Final'
 	testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.4.Final'
 }
-
-
-//we need this hack to satisfy the classloader conditions for javax.sql.DriverManager
-URLClassLoader loader = GroovyObject.class.classLoader
-configurations.jdbcdriver.each {File file ->
-	loader.addURL(file.toURI().toURL())
-}
-//Class.forName() is part of the above hack
-println "jdbc drivers: "+Class.forName("org.h2.Driver")+", "+Class.forName("org.postgresql.Driver")
-
 
 task buildId << {	
 	buildDir.mkdirs()
@@ -119,7 +110,13 @@ task loadDB(dependsOn: deploy) << {
 	sysprops.withInputStream {
 		System.properties.load(it)
 	}
-	println "connecting to database: ${System.properties.'exampleds.jdbc.url'}\nas user: ${System.properties.'exampleds.user'}"
+	configurations.jdbcdriver.files.each {
+		Sql.classLoader.addURL(it.toURI().toURL())
+	}
+	DriverManager.registerDriver(Sql.classLoader.loadClass("org.h2.Driver").newInstance())
+	DriverManager.registerDriver(Sql.classLoader.loadClass("org.postgresql.Driver").newInstance())
+
+    println "connecting to database: ${System.properties.'exampleds.jdbc.url'}\nas user: ${System.properties.'exampleds.user'}"
 	def sql= Sql.newInstance("${System.properties.'exampleds.jdbc.url'}",
 					    "${System.properties.'exampleds.user'}",
 						"${System.properties.'exampleds.password'}")
