@@ -6,6 +6,8 @@ apply plugin: 'groovy'
 	
 assert System.env.JBOSS_HOME!=null	
 
+archivesBaseName="jtrack-ee7"
+
 def sysprops=new File("${System.properties.'user.home'}/system.properties")
 assert sysprops.exists()
 
