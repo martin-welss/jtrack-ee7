@@ -82,7 +82,7 @@ task deploy(dependsOn: war, type: Copy) {
 	into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
 	
 
-	def target="${project.name}.war"
+	def target="${archivesBaseName}.war"
 	def ok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.deployed");
 	def nok=new File("${System.env.JBOSS_HOME}/standalone/deployments/${target}.failed");
 	
