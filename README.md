@@ -1,7 +1,9 @@
 jtrack-ee7
 ==========
 
-minimal bugtracker as java ee7 reference project using wildfly 8, gradle, arquillian and spock , and on the JEE side jsf, restful webservices, ejb, jpa and cdi
+![](images/screenshot.png)
+
+Minimal bugtracker as java ee7 reference project using wildfly 8, gradle, arquillian and spock , and on the JEE side jsf, restful webservices, ejb, jpa and cdi
 
 It is meant to be used in conjunction with the project wildfly-git-install:
 
@@ -16,15 +18,15 @@ BuildId
 The gradle build script generates automatically a unique buildId and puts into the META-INF directory of the generated .war file so it can be read and displayed by the application.
 The buildId contains the git commit the build is based on, a timestamp an the username:
 
-jtrack gd67182f B20140622 1851 mw
+    jtrack gd67182f B20140622 1851 mw
 
 If git considers the workspace dirty, a * is added:
 
-jtrack gd67182f*  B20140622 1851 mw
+    jtrack gd67182f*  B20140622 1851 mw
 
 Git tags are automatically associated:
 
-jtrack V_1_6 gd67182f B20140622 1851 mw
+    jtrack V_1_6 gd67182f B20140622 1851 mw
 
 The application displays the buildId in the footer of its web pages, so you can always easily identify the binary your dealing with
 
@@ -38,18 +40,18 @@ The deploy target shows how to deploy by drop-in and check the outcome by evalua
 Database
 ========
 
-For the loadDB target to function properly, you need to have a file $HOME/system.properties wich contains the database access parameters like this:
+For the loadDB target to function properly, you need to have a file $HOME/system.properties which contains the database access parameters like this:
 
-exampleds.jdbc.url: jdbc:postgresql:example
-exampleds.user: wildfly
-exampleds.password: wildfly
+    exampleds.jdbc.url: jdbc:postgresql:example
+    exampleds.user: wildfly
+    exampleds.password: wildfly
 
 Tests
 =====
 
 The tests show just how easy and elegant the source code is using spock and groovy. The following example shows head to read the userlist restful:
 
-def "read userlist restful"() {
+    def "read userlist restful"() {
 		
 		setup:
 			def jtrack = new RESTClient( 'http://localhost:8080/jtrack-ee7/items/')
@@ -62,7 +64,7 @@ def "read userlist restful"() {
 			assert response.contentType == JSON.toString()
 			assert ( response.data instanceof List )
 			println response.data
-}
+    }
 
 
 
