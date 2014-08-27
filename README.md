@@ -67,5 +67,50 @@ The tests show just how easy and elegant the source code is using spock and groo
     }
 
 
+SETUP
+=====
 
+Java and Gradle
+---------------
 
+First, we need to install Java JDK 1.7 or JDK 1.8 and Gradle 1.12 or 2.0 which can be found at  http://www.gradle.org/downloads.The whole example works without IDE using only the commandline although project files for the Spring Tool Suite are included. I found it always very important to be able to build and test the complete project on the commandline so it can easily be built on every server or workstation of the continuous integration pipeline.  
+To install Gradle, just unzip the archive and set the environment variables accordingly. Suppose we have both Java and Gradle installed in /home/opt, our environment variables in .bash_profile or .bashrc should look like this (assuming a Mac or Linux system, Windows users please adjust the syntax accordingly):
+
+    export JAVA_HOME=/home/opt/jdk7
+    export GRADLE_HOME=/home/opt/gradle
+    export PATH=$JAVA_HOME/bin:$GRADLE_HOME/bin:$PATH
+    export JBOSS_HOME=$HOME/wildfly-git-install
+    
+
+                                                                              
+Database PostgreSQL
+-------------------
+Please switch to the postgres_branch of wildfly-git-install. We then need to install and configure PostgreSQL: basically, all we need is a valid login into a database via TCP.  Mastertheboss has  of course the adequate tutorial: http://www.mastertheboss.com/jboss-datasource/configuring-a-datasource-with-postgresql-and-jboss/wildfly. The first section is sufficient.Then make sure the system.properties are in your $HOME directory and its contents adjusted to your system.
+
+Get it running
+--------------
+
+Start wildfly:
+
+    cd $JBOSS_HOME
+    ./bin/standalone.sh --server-config=standalone-full.xml -P=$HOME/system.properties
+
+Then build the application, deploy it and load some testdata:
+
+    cd jtrack-ee7
+    gradle loadDB
+
+To run the tests:
+
+    cd jtrack-ee7
+    gradle clean loadDB test
+
+    
+Jenkins
+-------
+
+It is no problem to build the project with the Jenkins Continuous Integration Server. Just install the git, git-client and gradle plugins and configure a new job. Add there the git repository and add a gradle build step with the targets 
+
+    clean loadDB test
+
+     
