@@ -73,7 +73,7 @@ SETUP
 Java and Gradle
 ---------------
 
-First, we need to install Java JDK 1.7 or JDK 1.8 and Gradle 1.12 or 2.0 which can be found at  http://www.gradle.org/downloads.The whole example works without IDE using only the commandline although project files for the Spring Tool Suite are included. I found it always very important to be able to build and test the complete project on the commandline so it can easily be built on every server or workstation of the continuous integration pipeline.  
+First, we need to install Java JDK 1.7 or JDK 1.8 and Gradle 1.12 or 2.0 which can be found at  http://www.gradle.org/downloads. The whole example works without IDE using only the commandline although project files for the Spring Tool Suite are included. I found it always very important to be able to build and test the complete project on the commandline so it can easily be built on every server or workstation of the continuous integration pipeline.  
 To install Gradle, just unzip the archive and set the environment variables accordingly. Suppose we have both Java and Gradle installed in /home/opt, our environment variables in .bash_profile or .bashrc should look like this (assuming a Mac or Linux system, Windows users please adjust the syntax accordingly):
 
     export JAVA_HOME=/home/opt/jdk7
