@@ -109,7 +109,7 @@ To run the tests:
 Jenkins
 -------
 
-It is no problem to build the project with the Jenkins Continuous Integration Server. Just install the git, git-client and gradle plugins and configure a new job. Add there the git repository and add a gradle build step with the targets 
+It is no problem to build the project with the Jenkins Continuous Integration Server. Just install the following plugins: git, git-client and gradle. Then configure a new job and add there the git repository and one gradle build step with these targets 
 
     clean loadDB test
 
