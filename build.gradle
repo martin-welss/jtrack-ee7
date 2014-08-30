@@ -35,7 +35,7 @@ dependencies {
 
 	jdbcdriver 'com.h2database:h2:1.3.173','org.postgresql:postgresql:9.3-1100-jdbc41'
 	
-	testCompile 'org.codehaus.groovy:groovy:2.0.6'
+	testCompile 'org.codehaus.groovy:groovy:2.3.4'
 	testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 	testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7'
 	testCompile 'org.wildfly:wildfly-arquillian-container-remote:8.1.0.Final'
