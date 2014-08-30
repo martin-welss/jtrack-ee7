@@ -35,6 +35,7 @@ class ArqBeanTest extends Specification {
 	 	
 		 when:
 		 	def prodlist=prodman.findAll();
+			 println "prodlist.size: ${prodlist.size()}"
 			 
 		 then:
 			assert prodlist.size() > 0
