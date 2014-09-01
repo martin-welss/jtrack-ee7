@@ -113,4 +113,8 @@ It is no problem to build the project with the Jenkins Continuous Integration Se
 
     clean loadDB test
 
-     
+Spock Arquillian
+----------------
+
+To use the elegant Spock test specifications for in-container tests with Arquillian, please checkout the branch spock_arquillian of jtrack. An example test is included. 
+    
