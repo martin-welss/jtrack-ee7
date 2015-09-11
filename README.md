@@ -3,14 +3,14 @@ jtrack-ee7
 
 ![](images/screenshot.png)
 
-Minimal bugtracker as java ee7 reference project using wildfly 8, gradle, arquillian and spock , and on the JEE side jsf, restful webservices, ejb, jpa and cdi
+Minimal bugtracker as java ee7 reference project using wildfly 9, gradle, arquillian and spock , and on the JEE side jsf, restful webservices, ejb, jpa and cdi
 
 It is meant to be used in conjunction with the project wildfly-git-install:
 
 https://github.com/martin-welss/wildfly-git-install
 
 which features a wildfly installation from a git repository and externalized local configuration.
-For this project, please use the postgres_branch of wildfly-git-install.
+
 
 BuildId
 =======
@@ -73,10 +73,10 @@ SETUP
 Java and Gradle
 ---------------
 
-First, we need to install Java JDK 1.7 or JDK 1.8 and Gradle 1.12 or 2.0 which can be found at  http://www.gradle.org/downloads. The whole example works without IDE using only the commandline although project files for the Spring Tool Suite are included. I found it always very important to be able to build and test the complete project on the commandline so it can easily be built on every server or workstation of the continuous integration pipeline.  
+First, we need to install Java JDK 1.8 and Gradle 2.5 or higher which can be found at  http://www.gradle.org/downloads. The whole example works without IDE using only the commandline although project files for the Spring Tool Suite are included. I found it always very important to be able to build and test the complete project on the commandline so it can easily be built on every server or workstation of the continuous integration pipeline.  
 To install Gradle, just unzip the archive and set the environment variables accordingly. Suppose we have both Java and Gradle installed in /home/opt, our environment variables in .bash_profile or .bashrc should look like this (assuming a Mac or Linux system, Windows users please adjust the syntax accordingly):
 
-    export JAVA_HOME=/home/opt/jdk7
+    export JAVA_HOME=/home/opt/jdk8
     export GRADLE_HOME=/home/opt/gradle
     export PATH=$JAVA_HOME/bin:$GRADLE_HOME/bin:$PATH
     export JBOSS_HOME=$HOME/wildfly-git-install
@@ -85,7 +85,7 @@ To install Gradle, just unzip the archive and set the environment variables acco
                                                                               
 Database PostgreSQL
 -------------------
-Please switch to the postgres_branch of wildfly-git-install. We then need to install and configure PostgreSQL: basically, all we need is a valid login into a database via TCP.  Mastertheboss has  of course the adequate tutorial: http://www.mastertheboss.com/jboss-datasource/configuring-a-datasource-with-postgresql-and-jboss/wildfly. The first section is sufficient.Then make sure the system.properties are in your $HOME directory and its contents adjusted to your system.
+We need to install and configure PostgreSQL: basically, all we need is a valid login into a database via TCP.  Mastertheboss has  of course the adequate tutorial: http://www.mastertheboss.com/jboss-datasource/configuring-a-datasource-with-postgresql-and-jboss/wildfly. The first section is sufficient.Then make sure the system.properties are in your $HOME directory and its contents adjusted to your system.
 
 Get it running
 --------------
