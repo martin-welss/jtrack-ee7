@@ -94,8 +94,8 @@ public class Bug {
 	@Override
 	public String toString() {
 		return "Bug [bugid=" + bugid + ", created=" + created + ", lastchange="
-				+ lastchange + ", title=" + title
-				+ ", description=" + description + ", state=" + state + "]";
+			+ lastchange + ", title=" + title
+			+ ", description=" + description + ", state=" + state + "]";
 	}
 
 	public User getReporter() {
