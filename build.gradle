@@ -104,7 +104,7 @@ task deploy(dependsOn: war, type: Copy) {
 			sleep(500);
 		}
 		if(deployed) { println("deploy ok.") }
-		else { throw new RuntimeException("Deployment failed, see Wildfly logs!") }
+		else { throw new RuntimeException("deployment failed, see wildfly logs!") }
 	}
 }
 
